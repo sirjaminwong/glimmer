@@ -1,9 +1,20 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useCallback, useState } from "react";
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const [word, setWord] = useState<string>("");
+  const hello = api.word.hello.useQuery({ text: "from tRPC" });
+  const data = api.word.getAll.useQuery();
+
+  console.log(data.data, 'data');
+
+  const { mutate, error } = api.challenge.create.useMutation();
+
+  const handleClick = useCallback(() => {
+    mutate({ text: word });
+  }, [mutate, word]);
 
   return (
     <>
@@ -44,6 +55,10 @@ export default function Home() {
           <p className="text-2xl text-white">
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
           </p>
+          <input onChange={
+            e => setWord(e.target.value)
+          } value={word}></input>
+          <button onClick={handleClick}>提交</button>
         </div>
       </main>
     </>
