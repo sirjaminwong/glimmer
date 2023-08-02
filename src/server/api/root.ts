@@ -1,5 +1,6 @@
-import { wordRouter, challengeRouter } from "~/server/api/routers/example";
 import { createTRPCRouter } from "~/server/api/trpc";
+import { challengeRouter } from "./routers/challenge";
+import { wordRouter } from "./routers/word";
 
 /**
  * This is the primary router for your server.

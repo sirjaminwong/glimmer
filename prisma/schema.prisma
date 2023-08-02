@@ -81,12 +81,14 @@ model Challenge {
   type               ChallengeType
   correctAnswer      String[]
   choices            Choice[]
-  translateChallenge TranslateChallenge[]
+  translateChallenge TranslateChallenge?
 }
 
 model TranslateChallenge {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  challengeId String    @db.ObjectId
+  challengeId String    @db.ObjectId @unique
+  name        String
+  score       Int
   challenge   Challenge @relation(fields: [challengeId], references: [id])
 }
 

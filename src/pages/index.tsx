@@ -3,10 +3,10 @@ import Link from "next/link";
 import { useCallback, useState } from "react";
 import { api } from "~/utils/api";
 
-export default function Home() {
+export default function Home(props) {
   const [word, setWord] = useState<string>("");
   const hello = api.word.hello.useQuery({ text: "from tRPC" });
-  const data = api.word.getAll.useQuery();
+  const data = api.challenge.getAll.useQuery();
 
   console.log(data.data, 'data');
 
