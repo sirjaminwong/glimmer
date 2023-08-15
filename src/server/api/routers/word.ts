@@ -14,15 +14,13 @@ export const wordRouter = createTRPCRouter({
     return ctx.prisma.word.findMany();
   }),
 
-  create: publicProcedure.input(z.object({ text: z.string() }))
+  create: publicProcedure
+    .input(z.object({ text: z.string() }))
     .mutation(({ input, ctx }) => {
       return ctx.prisma.word.create({
         data: {
-          word: input.text
-        }
-      })
-    })
+          word: input.text,
+        },
+      });
+    }),
 });
-
-
-

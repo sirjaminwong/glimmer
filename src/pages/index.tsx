@@ -8,7 +8,7 @@ export default function Home(props) {
   const hello = api.word.hello.useQuery({ text: "from tRPC" });
   const data = api.challenge.getAll.useQuery();
 
-  console.log(data.data, 'data');
+  console.log(data.data, "data");
 
   const { mutate, error } = api.challenge.create.useMutation();
 
@@ -55,9 +55,7 @@ export default function Home(props) {
           <p className="text-2xl text-white">
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
           </p>
-          <input onChange={
-            e => setWord(e.target.value)
-          } value={word}></input>
+          <input onChange={(e) => setWord(e.target.value)} value={word}></input>
           <button onClick={handleClick}>提交</button>
         </div>
       </main>
